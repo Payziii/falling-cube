@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 using System.Collections.Generic;
 
 [System.Serializable]
@@ -10,6 +11,7 @@ public class Part
     public string Etap;
     public float Player;
     public float Camera;
+    public Button Button;
 
     public override string ToString()
     {

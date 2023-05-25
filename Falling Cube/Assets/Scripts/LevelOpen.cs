@@ -13,6 +13,7 @@ public class LevelOpen : MonoBehaviour
     private int Max_Level;
     private void Start()
     {
+        Time.timeScale = 1f;
         GameObject LevelManager = GameObject.Find("LevelManager");
         List<Part> myList = LevelManager.GetComponent<LevelStart>().parts;
         Level = PlayerPrefs.GetInt("Level");
@@ -23,7 +24,7 @@ public class LevelOpen : MonoBehaviour
         float Camera = LevelManager.GetComponent<LevelStart>().parts.Find(p => p.Level == Level).Camera;
 
         CameraObject.transform.position = new Vector3(CameraObject.transform.position.x, Camera, CameraObject.transform.position.z);
-        PlayerObject.transform.position = new Vector3(PlayerObject.transform.position.x, Player, PlayerObject.transform.position.z);
+        PlayerObject.transform.position = new Vector3(6, Player, PlayerObject.transform.position.z);
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -45,13 +46,14 @@ public class LevelOpen : MonoBehaviour
                 float Camera = LevelManager.GetComponent<LevelStart>().parts.Find(p => p.Level == Level).Camera;
 
                 CameraObject.transform.position = new Vector3(CameraObject.transform.position.x, Camera, CameraObject.transform.position.z);
-                PlayerObject.transform.position = new Vector3(PlayerObject.transform.position.x, Player, PlayerObject.transform.position.z);
+                PlayerObject.transform.position = new Vector3(6, Player, PlayerObject.transform.position.z);
             }
             
             
         }else if (collision.gameObject.CompareTag("Red"))
         {
             DeathPanel.SetActive(true);
+            Time.timeScale = 0f;
         }
     }
 

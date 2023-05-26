@@ -14,12 +14,15 @@ public class LevelOpen : MonoBehaviour
     private int Level;
     private int Max_Level;
 
+    private Rigidbody rb;
+
     /* Делаем стандартное время, затем получаем list с уровнями, после этого
     вносим текущий уровень в PlayerPrefs, а также рекорд (Max_Level) и выводим
     на экран текущий уровень (НЕ ЗАБЫВАЕМ ВЫКЛЮЧИТЬ ПАНЕЛЬ СМЕРТИ).
     После проделанных действий перемещаем камеру и игрока в нужное место */
     private void Start()
     {
+        rb = GetComponent<Rigidbody>();
         Time.timeScale = 1f;
         GameObject LevelManager = GameObject.Find("LevelManager");
         List<Part> myList = LevelManager.GetComponent<LevelStart>().parts;
@@ -66,6 +69,9 @@ public class LevelOpen : MonoBehaviour
         {
             DeathPanel.SetActive(true);
             Time.timeScale = 0f;
+        }else if (collision.gameObject.CompareTag("Jump"))
+        {
+            rb.AddForce(Vector3.up * 0.19f, ForceMode.Impulse);
         }
     }
 

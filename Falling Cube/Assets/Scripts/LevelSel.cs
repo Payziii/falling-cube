@@ -13,6 +13,7 @@ public class LevelSel : MonoBehaviour
     [SerializeField] private Text Etap;
     [SerializeField] private Text Description;
 
+    // Вывод информации об уровне
     public void Click()
     {
         string Desc = LevelManager.GetComponent<LevelStart>().parts.Find(p => p.Level == Level).Description;

@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    // Скорость и Rigidbody
     public float speed = 5f;
     private Rigidbody rb;
 
@@ -10,6 +11,7 @@ public class PlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody>();
     }
 
+    // Само перемещение игрока (да, такое простое)
     void FixedUpdate()
     {
         float horizontalInput = Input.GetAxis("Horizontal");

@@ -4,13 +4,20 @@ using System.Collections.Generic;
 
 public class LevelOpen : MonoBehaviour
 {
+    // Объекты для перемещения (Игрок и камера)
     [SerializeField] GameObject CameraObject;
     [SerializeField] GameObject PlayerObject;
+    // Всякое нужное (Панель смерти, текст с текущим уровнем и т.д.)
     [SerializeField] GameObject DeathPanel;
     [SerializeField] Text LevelText;
     [SerializeField] int Levels;
     private int Level;
     private int Max_Level;
+
+    /* Делаем стандартное время, затем получаем list с уровнями, после этого
+    вносим текущий уровень в PlayerPrefs, а также рекорд (Max_Level) и выводим
+    на экран текущий уровень (НЕ ЗАБЫВАЕМ ВЫКЛЮЧИТЬ ПАНЕЛЬ СМЕРТИ).
+    После проделанных действий перемещаем камеру и игрока в нужное место */
     private void Start()
     {
         Time.timeScale = 1f;
@@ -27,6 +34,11 @@ public class LevelOpen : MonoBehaviour
         PlayerObject.transform.position = new Vector3(6, Player, PlayerObject.transform.position.z);
     }
 
+    /* Если игрок дошел до финиша, то делаем проверку (Если он побил рекорд,
+     то записываем новый). Также, если это не последний уровень, то мы переносим
+    камеру и игрока на новый уровень и выводим текущий уровень.
+    Если же игрок коснулся красной платформы, то мы просто ставим игру на
+    паузу и выводим панель смерти */
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.CompareTag("Finish"))

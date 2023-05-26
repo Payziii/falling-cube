@@ -5,6 +5,8 @@ public class OpeningLevel : MonoBehaviour
 {
     [SerializeField] private GameObject LevelManager;
     private int Max_Level;
+
+    // Активируем нужные кнопки, чтобы они были открыты
     void Start()
     {
         Max_Level = PlayerPrefs.GetInt("Max_Level");

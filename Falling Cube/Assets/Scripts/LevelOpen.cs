@@ -13,15 +13,31 @@ public class LevelOpen : MonoBehaviour
     [SerializeField] int Levels;
     private int Level;
     private int Max_Level;
+    // Кол-во пройденных уровней и смертей (1.1)
+    private int Deaths = 0;
+    private int LevelsCompleted = 0;
 
     private Rigidbody rb;
 
+    // Проверяем на наличие переменных и если они есть, записываем их значение
+    private void CheckPlayerPrefs()
+    {
+        if (PlayerPrefs.HasKey("Deaths"))
+        {
+            Deaths = PlayerPrefs.GetInt("Deaths");
+        }
+        if (PlayerPrefs.HasKey("LevelsCompleted"))
+        {
+            LevelsCompleted = PlayerPrefs.GetInt("LevelsCompleted");
+        }
+    }
     /* Делаем стандартное время, затем получаем list с уровнями, после этого
     вносим текущий уровень в PlayerPrefs, а также рекорд (Max_Level) и выводим
     на экран текущий уровень (НЕ ЗАБЫВАЕМ ВЫКЛЮЧИТЬ ПАНЕЛЬ СМЕРТИ).
     После проделанных действий перемещаем камеру и игрока в нужное место */
     private void Start()
     {
+        CheckPlayerPrefs();
         rb = GetComponent<Rigidbody>();
         Time.timeScale = 1f;
         GameObject LevelManager = GameObject.Find("LevelManager");
@@ -46,6 +62,8 @@ public class LevelOpen : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Finish"))
         {
+            LevelsCompleted++;
+            PlayerPrefs.SetInt("LevelsCompleted", LevelsCompleted);
             if (Levels >= Max_Level) 
             {
                 PlayerPrefs.SetInt("Max_Level", Level + 1); 
@@ -67,6 +85,8 @@ public class LevelOpen : MonoBehaviour
             
         }else if (collision.gameObject.CompareTag("Red"))
         {
+            Deaths++;
+            PlayerPrefs.SetInt("Deaths", Deaths);
             DeathPanel.SetActive(true);
             Time.timeScale = 0f;
         }else if (collision.gameObject.CompareTag("Jump"))

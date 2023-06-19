@@ -2,9 +2,12 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Collections.Generic;
 using Unity.VisualScripting;
+using System;
 
 public class LevelOpen : MonoBehaviour
 {
+    // Контроллер bridge
+    public VkBridgeController bridge;
     // Объекты для перемещения (Игрок и камера)
     [SerializeField] GameObject CameraObject;
     [SerializeField] GameObject PlayerObject;
@@ -24,16 +27,41 @@ public class LevelOpen : MonoBehaviour
     private Rigidbody rb;
 
     // Проверяем на наличие переменных и если они есть, записываем их значение
-    private void CheckPlayerPrefs()
+    private void CheckDeaths(string value)
     {
-        if (PlayerPrefs.HasKey("Deaths"))
+        if (value.Length != 0)
         {
-            Deaths = PlayerPrefs.GetInt("Deaths");
+            Deaths = Convert.ToInt32(value);
         }
-        if (PlayerPrefs.HasKey("LevelsCompleted"))
+        bridge.VKWebAppStorageGet("LevelsCompleted", CheckLevelsCompleted);
+    }
+
+    private void CheckLevelsCompleted(string value)
+    {
+        if (value.Length != 0)
         {
-            LevelsCompleted = PlayerPrefs.GetInt("LevelsCompleted");
+            LevelsCompleted = Convert.ToInt32(value);
         }
+        bridge.VKWebAppStorageGet("Level", GetLevel);
+    }
+
+    private void GetLevel(string value)
+    {
+        Level = Convert.ToInt32(value);
+        bridge.VKWebAppStorageGet("Max_Level", GetMaxLevel);
+    }
+
+    private void GetMaxLevel(string value)
+    {
+        if (value.Length != 0)
+        {
+            Max_Level = Convert.ToInt32(value);
+        }
+        else
+        {
+            Max_Level = 0;
+        }
+        Next();
     }
     /* Делаем стандартное время, затем получаем list с уровнями, после этого
     вносим текущий уровень в PlayerPrefs, а также рекорд (Max_Level) и выводим
@@ -41,14 +69,16 @@ public class LevelOpen : MonoBehaviour
     После проделанных действий перемещаем камеру и игрока в нужное место */
     private void Start()
     {
-        CheckPlayerPrefs();
+        bridge.VKWebAppStorageGet("Deaths", CheckDeaths);
+    }
+
+    private void Next()
+    {
         rb = GetComponent<Rigidbody>();
         Time.timeScale = 1f;
         GameObject LevelManager = GameObject.Find("LevelManager");
         List<Part> myList = LevelManager.GetComponent<LevelStart>().parts;
-        Level = PlayerPrefs.GetInt("Level");
         LevelText.text = "Уровень: " + Level.ToString();
-        Max_Level = PlayerPrefs.GetInt("Max_Level");
         DeathPanel.SetActive(false);
         float Player = LevelManager.GetComponent<LevelStart>().parts.Find(p => p.Level == Level).Player;
         float Camera = LevelManager.GetComponent<LevelStart>().parts.Find(p => p.Level == Level).Camera;
@@ -80,10 +110,10 @@ public class LevelOpen : MonoBehaviour
     private void FinishLevel()
     {
         LevelsCompleted++;
-        PlayerPrefs.SetInt("LevelsCompleted", LevelsCompleted);
+        bridge.VKWebAppStorageSet("LevelsCompleted", LevelsCompleted.ToString());
         if (Levels >= Max_Level)
         {
-            PlayerPrefs.SetInt("Max_Level", Level + 1);
+            bridge.VKWebAppStorageSet("Max_Level", (Level+1).ToString());
         }
         Level++;
         Max_Level++;
@@ -109,11 +139,11 @@ public class LevelOpen : MonoBehaviour
     private void PlayerDeath()
     {
         Deaths++;
-        PlayerPrefs.SetInt("Deaths", Deaths);
+        bridge.VKWebAppStorageSet("Deaths", Deaths.ToString());
         DeathPanel.SetActive(true);
         Time.timeScale = 0f;
 
-        int ads = Random.Range(0, 100);
+        int ads = UnityEngine.Random.Range(0, 100);
         if(ads < 10)
         {
             Vk.GetComponent<Vkgame>().ShowAds();
@@ -124,7 +154,7 @@ public class LevelOpen : MonoBehaviour
     {
         if (Levels >= Level)
         {
-            PlayerPrefs.SetInt("Level", Level);
+            bridge.VKWebAppStorageSet("Level", Level.ToString());
             DeathPanel.SetActive(false);
             PausePanel.SetActive(false);
             Start();

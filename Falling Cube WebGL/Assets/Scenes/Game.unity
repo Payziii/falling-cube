@@ -2108,10 +2108,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fdd61ef3c2de15848a2463bb5bb547ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bridge: {fileID: 1211107553}
   CameraObject: {fileID: 697851391}
   PlayerObject: {fileID: 186806713}
   PauseManager: {fileID: 1918282474}
-  Vk: {fileID: 0}
+  Vk: {fileID: 1803207440}
   DeathPanel: {fileID: 1953207171}
   PausePanel: {fileID: 998610733}
   LevelText: {fileID: 178277384}

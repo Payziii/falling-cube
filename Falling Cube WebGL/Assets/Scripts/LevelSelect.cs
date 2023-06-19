@@ -1,8 +1,12 @@
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class LevelSelect : MonoBehaviour
 {
+    // Контроллер bridge
+    public VkBridgeController bridge;
+
     //Указываются для каждого уровня
     [SerializeField] private int Level;
 
@@ -22,6 +26,6 @@ public class LevelSelect : MonoBehaviour
         Etap.text = "Этап: " + EtapLevel;
         Description.text = "Описание: " + Desc;
         LevelPanel.SetActive(true);
-        PlayerPrefs.SetInt("Level", Level);
+        bridge.VKWebAppStorageSet("Level", Level.ToString());
     }
 }

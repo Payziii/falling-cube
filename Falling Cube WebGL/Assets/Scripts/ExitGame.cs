@@ -26,6 +26,6 @@ public class ExitGame : MonoBehaviour
     // Выход игры при подтверждении выхода (Изменено 1.2)
     public void Exit()
     {
-        bridge.Send("VKWebAppJoinGroup", null, Text);
+        bridge.Send("VKWebAppClose", null, Text);
     }
 }

@@ -565,6 +565,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   music: {fileID: 349379580}
+  LoadingPanel: {fileID: 5633790379048781296}
   bridge: {fileID: 445012108}
 --- !u!1 &129888391
 GameObject:
@@ -4773,7 +4774,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &869299104
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6002,7 +6003,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ClosedMenu: {fileID: 1480919124}
   OpenedMenu: {fileID: 869299103}
-  ExitScript: {fileID: 0}
+  UsingLoading: 0
+  LoadingPanel: {fileID: 0}
 --- !u!1 &1034101805
 GameObject:
   m_ObjectHideFlags: 0
@@ -6369,7 +6371,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ClosedMenu: {fileID: 617466269}
   OpenedMenu: {fileID: 869299103}
-  ExitScript: {fileID: 0}
+  UsingLoading: 0
+  LoadingPanel: {fileID: 0}
 --- !u!1 &1130804565
 GameObject:
   m_ObjectHideFlags: 0
@@ -7313,7 +7316,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1236449576
 RectTransform:
   m_ObjectHideFlags: 0
@@ -10234,7 +10237,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ClosedMenu: {fileID: 629517464}
   OpenedMenu: {fileID: 617466269}
-  ExitScript: {fileID: 0}
+  UsingLoading: 0
+  LoadingPanel: {fileID: 0}
 --- !u!1 &1892087990
 GameObject:
   m_ObjectHideFlags: 0
@@ -10599,7 +10603,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ClosedMenu: {fileID: 1236449575}
   OpenedMenu: {fileID: 869299103}
-  ExitScript: {fileID: 0}
+  UsingLoading: 1
+  LoadingPanel: {fileID: 5633790379048781296}
 --- !u!1 &1948297715
 GameObject:
   m_ObjectHideFlags: 0
@@ -12218,5 +12223,10 @@ PrefabInstance:
 --- !u!224 &5633790379048781295 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 5935669336052918936, guid: 1710614a1c849b1428a754d3fca82358, type: 3}
+  m_PrefabInstance: {fileID: 5633790379048781294}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &5633790379048781296 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 9043718845948566313, guid: 1710614a1c849b1428a754d3fca82358, type: 3}
   m_PrefabInstance: {fileID: 5633790379048781294}
   m_PrefabAsset: {fileID: 0}

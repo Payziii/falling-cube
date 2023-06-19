@@ -13,6 +13,7 @@ public class UndoButton : MonoBehaviour
     {
         if (Input.GetKeyUp("escape"))
         {
+            if (LoadingPanel.activeInHierarchy == true && UsingLoading == true) return;
             OpenedMenu.SetActive(true);
             ClosedMenu.SetActive(false);
         }

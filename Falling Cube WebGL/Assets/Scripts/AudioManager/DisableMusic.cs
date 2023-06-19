@@ -1,11 +1,11 @@
 using System;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class DisableMusic : MonoBehaviour
 {
     [SerializeField] private Toggle music;
+    [SerializeField] private GameObject LoadingPanel;
     public VkBridgeController bridge;
     private int Music = 1;
 
@@ -27,6 +27,7 @@ public class DisableMusic : MonoBehaviour
     private void Next()
     {
         music.isOn = Music == 1;
+        LoadingPanel.SetActive(false);
     }
 
     public void Click()

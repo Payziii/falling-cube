@@ -2111,6 +2111,7 @@ MonoBehaviour:
   CameraObject: {fileID: 697851391}
   PlayerObject: {fileID: 186806713}
   PauseManager: {fileID: 1918282474}
+  Vk: {fileID: 0}
   DeathPanel: {fileID: 1953207171}
   PausePanel: {fileID: 998610733}
   LevelText: {fileID: 178277384}
@@ -8707,6 +8708,7 @@ MonoBehaviour:
   - {fileID: 656905708}
   - {fileID: 656905707}
   - {fileID: 656905711}
+  bridge: {fileID: 1211107553}
 --- !u!4 &656905710
 Transform:
   m_ObjectHideFlags: 0

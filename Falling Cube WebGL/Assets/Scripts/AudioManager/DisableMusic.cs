@@ -6,27 +6,33 @@ using UnityEngine.UI;
 public class DisableMusic : MonoBehaviour
 {
     [SerializeField] private Toggle music;
+    public VkBridgeController bridge;
     private int Music = 1;
 
     // Проверяем на наличие переменных и если они есть, записываем их значение (1.2)
-    private void CheckPlayerPrefs()
+    private void CheckPlayerPrefs(string value)
     {
-        if (PlayerPrefs.HasKey("Music"))
+        if (value.Length != 0)
         {
-            Music = PlayerPrefs.GetInt("Music");
+            Music = Convert.ToInt32(value);
         }
+        Next();
     }
 
     private void Start()
     {
-        CheckPlayerPrefs();
+        bridge.VKWebAppStorageGet("Music", CheckPlayerPrefs);
+    }
+
+    private void Next()
+    {
         music.isOn = Music == 1;
     }
 
     public void Click()
     {
         int on = Convert.ToInt32(music.isOn);
-        PlayerPrefs.SetInt("Music", on);
+        bridge.VKWebAppStorageSet("Music", on.ToString());
         Debug.Log(on);
     }
 }

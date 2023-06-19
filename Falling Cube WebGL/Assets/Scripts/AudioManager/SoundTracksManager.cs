@@ -1,9 +1,11 @@
+using System;
 using Unity.VisualScripting;
 using UnityEngine;
 
 public class SoundTracksManager : MonoBehaviour
 {
     [SerializeField] AudioSource[] Sounds;
+    public VkBridgeController bridge;
 
     private int SelectedSound;
     private float SoundLength;
@@ -11,17 +13,18 @@ public class SoundTracksManager : MonoBehaviour
     private int Music = 1;
 
     // ѕровер€ем на наличие переменных и если они есть, записываем их значение (1.2)
-    private void CheckPlayerPrefs()
+    private void CheckPlayerPrefs(string value)
     {
-        if (PlayerPrefs.HasKey("Music"))
+        if (value.Length != 0)
         {
-            Music = PlayerPrefs.GetInt("Music");
+            Music = Convert.ToInt32(value);
         }
+        Next();
     }
 
     private void TrackChange()
     {
-        SelectedSound = Random.Range(0, 3);
+        SelectedSound = UnityEngine.Random.Range(0, 3);
 
         Sounds[SelectedSound].Play();
         SoundLength = Sounds[SelectedSound].clip.length;
@@ -30,7 +33,11 @@ public class SoundTracksManager : MonoBehaviour
 
     private void Start()
     {
-        CheckPlayerPrefs();
+        bridge.VKWebAppStorageGet("Music", CheckPlayerPrefs);
+    }
+
+    private void Next()
+    {
         Debug.Log("«начение: " + Music);
         if (Music == 1)
         {

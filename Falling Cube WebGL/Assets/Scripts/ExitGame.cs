@@ -1,9 +1,13 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class ExitGame : MonoBehaviour
 {
     // Окно с согласием на выход из игры
     [SerializeField] private GameObject ExitMenu;
+
+    // Контроллер bridge (1.2)
+    public VkBridgeController bridge;
 
     // Открытие окна при нажатии на ESC
     void Update()
@@ -14,9 +18,14 @@ public class ExitGame : MonoBehaviour
         }
     }
 
-    // Выход игры при подтверждении выхода
+    private void Text(string json)
+    {
+        
+    }
+
+    // Выход игры при подтверждении выхода (Изменено 1.2)
     public void Exit()
     {
-        Application.Quit();
+        bridge.Send("VKWebAppJoinGroup", new Dictionary<string, string> { { "status", "success" } }, Text);
     }
 }

@@ -10033,6 +10033,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ExitMenu: {fileID: 1326910140}
+  bridge: {fileID: 445012108}
 --- !u!1 &1823377452
 GameObject:
   m_ObjectHideFlags: 0

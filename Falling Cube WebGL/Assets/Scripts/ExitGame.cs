@@ -20,12 +20,12 @@ public class ExitGame : MonoBehaviour
 
     private void Text(string json)
     {
-        
+        Debug.Log(json);
     }
 
     // Выход игры при подтверждении выхода (Изменено 1.2)
     public void Exit()
     {
-        bridge.Send("VKWebAppJoinGroup", new Dictionary<string, string> { { "status", "success" } }, Text);
+        bridge.Send("VKWebAppJoinGroup", null, Text);
     }
 }
